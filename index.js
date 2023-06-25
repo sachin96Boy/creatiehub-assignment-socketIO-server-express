@@ -5,6 +5,11 @@ const port = process.env.PORT || 8080;
 
 io.on('connection', (socket) => {
   console.log('user connected');
+
+  socket.on('emituserdata',(dataFromClient)=>{
+    console.log(dataFromClient);
+  })
+
   socket.on('disconnect', function () {
     console.log('user disconnected');
   });
