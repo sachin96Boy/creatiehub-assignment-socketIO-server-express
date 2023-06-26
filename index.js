@@ -17,7 +17,7 @@ io.on("connection", (socket) => {
   listOfUsers.push(socket.id);
   socket.on("emituserdata", (dataFromClient) => {
     listOfUsers.forEach((userId) => {
-      if (userId != socket.id) {
+      if (userId !== socket.id) {
         socket.emit("sendDatatoClient", dataFromClient);
       }
     });
