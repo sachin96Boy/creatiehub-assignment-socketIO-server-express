@@ -10,17 +10,13 @@ const io = require("socket.io")(server, {
 });
 const port = process.env.PORT || 8080;
 
-var listOfUsers = [];
-
 io.on("connection", (socket) => {
   console.log("user connected");
-  listOfUsers.push(socket.id);
+
   socket.on("emituserdata", (dataFromClient) => {
-    listOfUsers.forEach((userId) => {
-      if (userId !== socket.id) {
-        socket.emit("sendDatatoClient", dataFromClient);
-      }
-    });
+    // brodcast will send the data to other clients without
+    // the cliend that sending the data
+    socket.broadcast.emit("sendDatatoClient", dataFromClient);
   });
 
   socket.on("disconnect", function () {
